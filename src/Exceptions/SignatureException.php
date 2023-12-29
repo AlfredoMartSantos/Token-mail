@@ -1,4 +1,4 @@
-<?php namespace Pelrock\Signature\Exceptions;
+<?php namespace Pelrock\SignatureMailToken\Exceptions;
 
 use Exception;
 

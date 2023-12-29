@@ -1,5 +1,5 @@
 {
-  "name": "pelrock/signature",
+  "name": "AlfredoMartSantos/TokenMail",
   "description": "sha256",
   "keywords": ["sha256", "signature"],
   "license": "MIT",
@@ -11,7 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Pelrock\\Signature\\": "src"
+      "Pelrock\\SignatureMailToken\\": "src"
     }
   },
   "autoload-dev": {

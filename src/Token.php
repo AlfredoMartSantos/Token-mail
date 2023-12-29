@@ -1,4 +1,4 @@
-<?php namespace Pelrock\Signature;
+<?php namespace Pelrock\SignatureMailToken;
 
 /**
  * Class Token

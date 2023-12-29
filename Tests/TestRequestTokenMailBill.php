@@ -1,6 +1,6 @@
-<?php namespace Pelrock\Signature\Tests;
-use Pelrock\Signature\Token;
-use Pelrock\Signature\RequestTokenMailBill;
+<?php namespace Pelrock\SignatureMailToken\Tests;
+use Pelrock\SignatureMailToken\Token;
+use Pelrock\SignatureMailToken\RequestTokenMailBill;
 use PHPUnit\Framework\TestCase;
 
 class TestRequestTokenMailBill extends TestCase
