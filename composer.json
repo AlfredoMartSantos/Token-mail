@@ -1,0 +1,28 @@
+{
+  "name": "pelrock/signature",
+  "description": "sha256",
+  "keywords": ["sha256", "signature"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alfredo Martin",
+      "email": "pelrock@pelrock.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Pelrock\\Signature\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Pelrock\\Signature\\Tests\\": "tests"
+    }
+  },
+  "require": {
+    "php": ">=5.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  }
+}
