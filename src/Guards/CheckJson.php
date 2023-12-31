@@ -5,13 +5,14 @@ namespace Pelrock\SignatureMailToken\Guards;
 
 
 use Pelrock\SignatureMailToken\Exceptions\SignatureJsonDecodeException;
+use Pelrock\SignatureMailToken\Token;
 
-class CheckJson
+class CheckJson implements Guard
 {
     /**
      * @inheritDoc
      */
-    public function check($json)
+    public function check(Token $token, string $json, string $cadena)
     {
         $jsonDecoded = json_decode($json);
         if ($jsonDecoded === null && json_last_error() !== JSON_ERROR_NONE) {

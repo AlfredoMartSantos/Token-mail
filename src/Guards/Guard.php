@@ -15,5 +15,5 @@ interface Guard
      * @param string $prefix
      * @return bool
      */
-    public function check(Token $token);
+    public function check(Token $token, string $string, string $cadena );
 }

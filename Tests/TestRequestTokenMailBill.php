@@ -16,14 +16,12 @@ class TestRequestTokenMailBill extends TestCase
     public function setUp()
     {
         $this->token = new Token($this->key, $this->vector, $this->cypher);
-        $this->request = new RequestTokenMailBill([new CheckKey()]);
+        $this->request = new RequestTokenMailBill([new CheckKey(), new CheckJson()]);
     }
     /** @test */
     public function should_sign_request() {
         $string = "{\"userId\":\"859205\",\"username\":\"admin\"}";
-
         $auth = $this->request->sign($this->token, $string);
-
         $this->assertEquals("QW9GTGwrS29ZTnN5S0d3aVU0NUE2azhmYmc2bjhHMElWbWsyODJNYys1REFJWEtST2wyQllBN1JFNlhsVFY0Mg==", $auth);
     }
     /** @test  */
@@ -42,10 +40,18 @@ class TestRequestTokenMailBill extends TestCase
         $auth = $this->request->sign($this->token, $string);
     }
     /** @test  */
-    public function sould_throw_exception_json_wrong()
+    public function sould_throw_exception_json_to_decode_wrong()
     {
         $this->setExpectedException('Pelrock\SignatureMailToken\Exceptions\SignatureJsonDecodeException');
         $auth = $this->request->unSign($this->token, "ascodetoken");
+
+    }
+    /** @test */
+    public function should_throw_exception_json_to_encode_wrong()
+    {
+        $this->setExpectedException('Pelrock\SignatureMailToken\Exceptions\SignatureJsonDecodeException');
+        $string = "{}{\"userId\":\"859205\",\"username\":\"admin\"}";
+        $auth = $this->request->sign($this->token, $string);
 
     }
 }

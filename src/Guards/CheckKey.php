@@ -16,7 +16,7 @@ class CheckKey implements Guard
      * @throws SignatureKeyException
      * @return bool
      */
-    public function check(Token $token)
+    public function check(Token $token, string $string, string $cadena)
     {
         if ($token->key() ===null) {
             throw new SignatureKeyException('The authentication key has not been set');
