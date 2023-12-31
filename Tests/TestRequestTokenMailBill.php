@@ -1,4 +1,6 @@
 <?php namespace Pelrock\SignatureMailToken\Tests;
+use Pelrock\SignatureMailToken\Guards\CheckJson;
+use Pelrock\SignatureMailToken\Guards\CheckKey;
 use Pelrock\SignatureMailToken\Token;
 use Pelrock\SignatureMailToken\RequestTokenMailBill;
 use PHPUnit\Framework\TestCase;
@@ -14,13 +16,14 @@ class TestRequestTokenMailBill extends TestCase
     public function setUp()
     {
         $this->token = new Token($this->key, $this->vector, $this->cypher);
-        $this->request = new RequestTokenMailBill();
+        $this->request = new RequestTokenMailBill([new CheckKey()]);
     }
     /** @test */
-    public function should_sign_request()
-    {
+    public function should_sign_request() {
         $string = "{\"userId\":\"859205\",\"username\":\"admin\"}";
+
         $auth = $this->request->sign($this->token, $string);
+
         $this->assertEquals("QW9GTGwrS29ZTnN5S0d3aVU0NUE2azhmYmc2bjhHMElWbWsyODJNYys1REFJWEtST2wyQllBN1JFNlhsVFY0Mg==", $auth);
     }
     /** @test  */
@@ -30,6 +33,20 @@ class TestRequestTokenMailBill extends TestCase
         $string = "{\"userId\":\"859205\",\"username\":\"admin\"}";
         $this->assertEquals($string, $auth);
     }
+    /** @test */
+    public function should_throw_exception_on_missing_key()
+    {
+        $this->setExpectedException('Pelrock\SignatureMailToken\Exceptions\SignatureKeyException');
+        $this->token = new Token(null, $this->vector, $this->cypher);
+        $string = "{\"userId\":\"859205\",\"username\":\"admin\"}";
+        $auth = $this->request->sign($this->token, $string);
+    }
+    /** @test  */
+    public function sould_throw_exception_json_wrong()
+    {
+        $this->setExpectedException('Pelrock\SignatureMailToken\Exceptions\SignatureJsonDecodeException');
+        $auth = $this->request->unSign($this->token, "ascodetoken");
 
+    }
 }
 

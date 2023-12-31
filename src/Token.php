@@ -11,6 +11,30 @@ class Token
     private $key;
 
     /**
+     * @param string $key
+     */
+    public function setKey(string $key): void
+    {
+        $this->key = $key;
+    }
+
+    /**
+     * @param string $ivector
+     */
+    public function setIvector(string $ivector): void
+    {
+        $this->ivector = $ivector;
+    }
+
+    /**
+     * @param string $cipher
+     */
+    public function setCipher(string $cipher): void
+    {
+        $this->cipher = $cipher;
+    }
+
+    /**
      * @var string
      */
     private $ivector;
@@ -28,7 +52,7 @@ class Token
      * @param string $cipher
      * @return void
      */
-    public function __construct($key, $ivector, $cipher)
+    public function __construct($key=null, $ivector=null, $cipher=null)
     {
         $this->key    = $key;
         $this->ivector = $ivector;
